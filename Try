@@ -1,0 +1,17 @@
+#include "HX711.h"
+
+HX711 scale;
+
+void setup() {
+  Serial.begin(9600);
+  scale.begin(DOUT, SCK); // Подключи свои пины
+  scale.set_scale();      // Установи масштаб (настраивается калибровкой)
+  scale.tare();           // Сбрасываем вес на "0"
+}
+
+void loop() {
+  Serial.print("Вес: ");
+  Serial.print(scale.get_units(), 1); // Чтение веса в единицах
+  Serial.println(" кг");
+  delay(500);
+}
